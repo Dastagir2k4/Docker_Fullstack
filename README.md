@@ -26,11 +26,11 @@ ReservEat is a web application that allows users to reserve tables at hotels wit
 # Frontend Dependencies (React.js with Tailwind CSS)
 cd ReservEat/frontend
 npm init -y
-npm install react react-dom
+npm install react react-dom react-redux redux
 npm install tailwindcss@latest postcss@latest autoprefixer@latest
 npx tailwindcss init -p
 
 # Backend Dependencies (Node.js with Express.js)
 cd ../backend
 npm init -y
-npm install express body-parser cors bcrypt mysql
+npm install express body-parser cors bcrypt mysql2
