@@ -2,7 +2,7 @@ const express=require("express");
 const mysql=require("mysql2");
 const cors=require("cors");
 const bcrypt = require('bcrypt');
-
+const nodemail=require("nodemailer")
 
 const app=express();
 
@@ -26,7 +26,46 @@ db.connect((err)=>{
     }
 })
 
+//Dastagir@2527
 
+
+app.post("/payment-mail",(req,res)=>{
+    const UserName =req.body.UserName
+    const userMail = req.body.Email
+    const HotelName =req.body.HotelName
+    const Amount=req.body.totalAmount
+    try{
+        const transporter=nodemail.createTransport({
+            service:'gmail',
+            auth:{
+                user:"ahmeddastagir4@gmail.com",
+                pass:"xzdp bzgc fyfe ntqb"
+            }
+        })
+        
+        const mailOptions = {
+            from: 'ahmeddastagir4@gmail.com',
+            // to: `${userMail}`,
+            to:'dastagir2k@gmail.com',
+            subject: `Successfully booked Table in ${HotelName}`,
+            text: `Name : ${UserName}
+                   Total Amount Paid : ${Amount}
+                   Thank You for booking`
+          };
+        
+        
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email senttt: ' + info.response);
+            }
+          });
+    }catch(err){
+        res.status(500).send("error email in server")
+    }
+})
+  
 app.post("/signup", async (req, res) => {
     const FirstName = req.body.FirstName;
     const LastName = req.body.LastName;
@@ -73,42 +112,86 @@ app.post("/signup", async (req, res) => {
   
 
 // checking the login 
+// app.post('/login', async (req, res) => {
+//     const Email = req.body.Email;
+//     const Password = req.body.Password;
+  
+//     try {
+//       // Retrieve the user record from the database
+//       db.query('SELECT * FROM Users WHERE Email = ?', [Email], async (err, result) => {
+//         if (err) {
+//           console.log("Error while retrieving user:", err);
+//           res.status(500).send("Error while retrieving user");
+//           return;
+//         }
+  
+//         if (result.length === 0) {
+//           console.log("User not found");
+//           res.status(400).send("User not found");
+//           return;
+//         }
+  
+//         const user = result[0];
+  
+//         // Compare the entered password with the hashed password from the database
+//         const match = await bcrypt.compare(Password, user.Password);
+//         if (match) {
+//           console.log("User logged in");
+//           res.status(200).json({ role: 'admin' });
+//         } else {
+//           console.log("Incorrect password");
+//           res.status(400).send("Incorrect password");
+//         }
+//       });
+//     } catch (error) {
+//       console.error("Error during login:", error);
+//       res.status(500).send("Error during login");
+//     }
+//   });
+
 app.post('/login', async (req, res) => {
-    const Email = req.body.Email;
-    const Password = req.body.Password;
-  
-    try {
-      // Retrieve the user record from the database
+  const Email = req.body.Email;
+  const Password = req.body.Password;
+
+  try {
       db.query('SELECT * FROM Users WHERE Email = ?', [Email], async (err, result) => {
-        if (err) {
-          console.log("Error while retrieving user:", err);
-          res.status(500).send("Error while retrieving user");
-          return;
-        }
-  
-        if (result.length === 0) {
-          console.log("User not found");
-          res.status(400).send("User not found");
-          return;
-        }
-  
-        const user = result[0];
-  
-        // Compare the entered password with the hashed password from the database
-        const match = await bcrypt.compare(Password, user.Password);
-        if (match) {
-          console.log("User logged in");
-          res.status(200).json({ role: 'admin' });
-        } else {
-          console.log("Incorrect password");
-          res.status(400).send("Incorrect password");
-        }
+          if (err) {
+              console.log("Error while retrieving user:", err);
+              res.status(500).send("Error while retrieving user");
+              return;
+          }
+
+          if (result.length === 0) {
+              console.log("User not found");
+              res.status(400).send("User not found");
+              return;
+          }
+
+          const user = result[0];
+
+          const match = await bcrypt.compare(Password, user.Password);
+          if (match) {
+              console.log("User logged in");
+              res.status(200).json({ 
+                  role: 'admin',
+                  user: {
+                      FirstName: user.FirstName,
+                      LastName: user.LastName,
+                      Email: user.Email
+                      // Add any other user details you want to pass
+                  }
+              });
+          } else {
+              console.log("Incorrect password");
+              res.status(400).send("Incorrect password");
+          }
       });
-    } catch (error) {
+  } catch (error) {
       console.error("Error during login:", error);
       res.status(500).send("Error during login");
-    }
-  });
+  }
+});
+
 
 app.post('/add-hotel',(req,res)=>{
     const Name=req.body.Name;
