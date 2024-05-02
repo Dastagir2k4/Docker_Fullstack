@@ -8,7 +8,7 @@ import ListCards from "./components/ListofRestaurants/Restaurants";
 import RestuarantDetail from "./components/restaurant_details/RestuarantDetail";
 import PaymentPage from "./components/payment_page/PaymentPage";
 import Profile from "./components/profile/Profile";
-import SampleLogin from "./components/SampleLogin"; // Import without curly braces
+ // Import without curly braces
 
 const App = () => {
     return (

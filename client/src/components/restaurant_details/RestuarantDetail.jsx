@@ -1,11 +1,10 @@
-
-
 import { Fragment, useState, useEffect } from "react";
 import Modals from "../Modals/Modals";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const RestuarantDetail = () => {
+  let amount=0;
   const { id } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -21,7 +20,6 @@ const RestuarantDetail = () => {
       try {
         const response = await axios.get(`http://localhost:3030/hotels/${id}`);
         setData(response.data);
-        
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching restaurant:", error);
@@ -32,19 +30,23 @@ const RestuarantDetail = () => {
 
     fetchRestaurant();
   }, [id]);
-  const handleSubmit=(e)=>{
-    e.preventDefault();
-    if(guests>data[0].Accomodation){
-      alert("Room limit is exceded")
-    }else{
 
-      showModal(false)
+  const handleSubmit = (e) => {
+    amount = guests * 50;
+    e.preventDefault();
+    if (guests > data[0].Accomodation) {
+      alert("Room limit is exceeded");
+    } else {
+      setShowModal(false);
     }
-    console.log("time "+time);
-  }
+  };
+
   const navToPay = () => {
     navigate(`/payment/${guests * 50}/${data[0].Name}`);
   };
+
+  // Check if date, time, and guests are filled to enable navigation to payment page
+  const isReadyToPay = date && time && guests;
 
   return (
     <Fragment>
@@ -57,19 +59,21 @@ const RestuarantDetail = () => {
           <div className="container mx-auto">
             <div className="flex-col md:flex-row flex w-8/12 overflow-hidden rounded-xl mx-auto shadow-lg h-[600px]">
               <div className="w-1/2">
-                <h2 className="text-2xl font-semibold">Name :<span className="text-lg font-semibold"> {data.length > 0 ? data[0].Name : "No data found"} </span></h2>
-                <h2 className="text-2xl font-semibold">Location :<span className="text-lg font-medium"> {data[0].Location}</span> </h2>
-                <h2 className="text-2xl font-semibold">Number of Accomdation: <span> {data[0].Accomodation} </span></h2>
+                <h2 className="text-2xl py-1 font-semibold">Name :<span className="text-lg font-semibold"> {data.length > 0 ? data[0].Name : "No data found"} </span></h2>
+                <h2 className="text-2xl py-1 font-semibold">Location :<span className="text-lg font-medium"> {data[0].Location}</span> </h2>
+                <h2 className="text-2xl py-1 font-semibold mb-3">Number of Accommodation: <span> {data[0].Accomodation} </span></h2>
                 <img src={data.length > 0 ? data[0].ImageUrl : ""} alt="Restaurant" className="rounded-2xl h-[610px]" />
               </div>
               <div className="w-1/2 py-16 px-12 mt-20 ">
-                <button className="text-3xl mb-4 top-20 cursor-pointer  px-4 w-56 h-10 text-white bg-red-500" onClick={() => setShowModal(true)}>Select Slots   </button>
+                <button className="text-2xl mb-4  cursor-pointer  px-4  w-56 h-8  text-white bg-red-500" onClick={() => setShowModal(true)}>Select Slots   </button>
                 <div className="bg-gray-200 text-black px-6 py-6">
                   <h2 className="text-2xl mb-2">Your date : <span className="text-lg font-semibold">{date}</span></h2>
                   <p className="mb-2 text-xl">Selected guests  :<span className="text-lg font-semibold"> {guests} </span> </p>
                   <h2 className="mb-2 text-xl ">Book Table per person : <span className="text-lg font-semibold">50R</span></h2>
-                  <p className="mb-2 text-xl">Total Amount :{guests * 50} R <span></span></p>
-                  <button className="bg-indigo-600 w-full text-white mt-20 p-2 text-xl" onClick={navToPay}>Pay</button>
+                  <p className="mb-2 text-xl">Total Amount :{amount !== 0 ? amount : ""}  <span></span></p>
+                  {isReadyToPay && (
+                    <button className="bg-indigo-600 w-full text-white mt-20 p-2 text-xl" onClick={navToPay}>Pay {amount != 0 ? amount : ""}</button>
+                  )}
                 </div>
               </div>
             </div>
