@@ -3,7 +3,7 @@ const mysql=require("mysql2");
 const cors=require("cors");
 const bcrypt = require('bcrypt');
 const nodemail=require("nodemailer")
-const dotenv= require("dotenv")
+=
 const app=express();
 dotenv.config();
 app.use(express.json());
@@ -39,7 +39,7 @@ app.post("/payment-mail",(req,res)=>{
             service:'gmail',
             auth:{
                 user:"ahmeddastagir4@gmail.com",
-                pass:process.env.ACCNT_PASS
+                pass:"xzdp bzgc fyfe ntqb"
             }
         })
         
