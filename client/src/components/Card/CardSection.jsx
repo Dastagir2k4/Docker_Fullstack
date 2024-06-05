@@ -65,7 +65,7 @@ const Card = () => {
       <div className="text-4xl py-20 px-16 ml-20 font-lead">
         <h2>Restaurants Near You</h2>
       </div>
-      <div className=" gap-6 flex-wrap flex justify-center items-center mx-auto">
+      <div className=" gap-6 flex-wrap flex justify-center items-center mx-auto mb-20">
         <div className="flex flex-wrap justify-center items-center gap-6">
           {restaurants.map((restaurant, index) => (
             <div
@@ -76,7 +76,7 @@ const Card = () => {
               <img
                 src={restaurant.ImageUrl}
                 alt={restaurant.Name}
-                className="h-50 w-80 rounded-xl object-cover"
+                className="h-60 w-80 rounded-xl object-cover"
               />
               <div className="p-2">
                 <div className="flex justify-between">

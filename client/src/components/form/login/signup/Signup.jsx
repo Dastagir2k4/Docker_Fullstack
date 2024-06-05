@@ -32,17 +32,18 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen py-40">
+    <div className="min-h-screen py-10">
       <div className="container mx-auto">
         <div className="flex w-8/12 overflow-hidden rounded-xl mx-auto shadow-lg">
-          <div className="w-1/2">
+          <div className="md:w-1/2">
             <img src={signupImage} alt="Signup" />
           </div>
-          <div className="w-1/2 py-16 px-12 mt-40">
+
+<div className="md:w-1/2 py-16 px-12 mt-20">
             <h2 className="text-3xl mb-4">Register</h2>
             <p className="mb-4">Create an Account</p>
             <form>
-              <div className="grid grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <input
                   type="text"
                   placeholder="First Name"
@@ -88,6 +89,7 @@ const Signup = () => {
               </div>
             </form>
           </div>
+
         </div>
       </div>
     </div>

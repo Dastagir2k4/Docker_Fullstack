@@ -4,8 +4,11 @@ import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+// import { useSelector } from 'react-redux';
+
 
 const PaymentPage = () => {
+  // const userDetails = useSelector((state) => state.user.value);
   const { totalAmount, HotelName } = useParams();
   const totalPerson = totalAmount / 50;
   const user = useSelector((state) => state.user.value);
@@ -42,6 +45,7 @@ const PaymentPage = () => {
     }
 
     // If there are validation errors, set them and return
+    const UserName = user.FirstName;
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
       return;
@@ -49,14 +53,21 @@ const PaymentPage = () => {
 
     // If no errors, proceed with form submission
     try {
-      const UserName = user.FirstName;
-      const Email = user.Email;
-      axios.post("http://localhost:3030/payment-mail", {
-        UserName: UserName,
-        Email: Email,
-        HotelName: HotelName,
+      const Email = user.UserId;
+      console.log(Email);
+      axios.post("http://localhost:3030/add-hotelOrder",{
+        UserId:user.UserId,
+        hotelname: HotelName,
+        totalPerson:totalPerson,
         totalAmount: totalAmount,
-      });
+      })
+      // axios.post("http://localhost:3030/payment-mail", {
+      //   UserName: UserName,
+      //   Email: Email,
+      //   HotelName: HotelName,
+      //   totalAmount: totalAmount,
+      // });
+
 
       console.log("successfully sent mail from client");
       toast.success("Tabled booked successfully", {

@@ -26,9 +26,9 @@ const ListCards = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-red-500">
       <input
-        className="w-1/2 mb-4 mt-4 h-8 px-2 py-3 rounded-lg text-white text-2xl bg-black border-black"
+        className="w-1/2 mb-4 mt-4 h-8 px-2 py-3 rounded-lg text-black text-2xl bg-white border-black"
         placeholder="Search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}

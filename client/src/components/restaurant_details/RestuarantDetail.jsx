@@ -2,6 +2,7 @@ import { Fragment, useState, useEffect } from "react";
 import Modals from "../Modals/Modals";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../navbar/Navbar";
 
 const RestuarantDetail = () => {
   let amount=0;
@@ -50,21 +51,23 @@ const RestuarantDetail = () => {
 
   return (
     <Fragment>
+          <Navbar/>
       {isLoading ? (
         <div>Loading...</div>
       ) : error ? (
         <div>Error fetching restaurant data</div>
       ) : (
+          // <Navbar/>
         <div className="min-h-screen py-40 ">
           <div className="container mx-auto">
-            <div className="flex-col md:flex-row flex w-8/12 overflow-hidden rounded-xl mx-auto shadow-lg h-[600px]">
+            <div className="flex-col md:flex-row flex w-8/12 overflow-hidden rounded-xl mx-auto shadow-2xl h-[600px]">
               <div className="w-1/2">
-                <h2 className="text-2xl py-1 font-semibold">Name :<span className="text-lg font-semibold"> {data.length > 0 ? data[0].Name : "No data found"} </span></h2>
-                <h2 className="text-2xl py-1 font-semibold">Location :<span className="text-lg font-medium"> {data[0].Location}</span> </h2>
-                <h2 className="text-2xl py-1 font-semibold mb-3">Number of Accommodation: <span> {data[0].Accomodation} </span></h2>
-                <img src={data.length > 0 ? data[0].ImageUrl : ""} alt="Restaurant" className="rounded-2xl h-[610px]" />
+                <img src={data.length > 0 ? data[0].ImageUrl : ""} alt="Restaurant" className="rounded-2xl h-[510px] w-[810px]" />
               </div>
-              <div className="w-1/2 py-16 px-12 mt-20 ">
+              <div className="w-1/2 py-6 px-12 mt-10 ">
+              <h2 className="text-2xl py-1 font-semibold">Name :<span className="text-xl font-semibold"> {data.length > 0 ? data[0].Name : "No data found"} </span></h2>
+                <h2 className="text-2xl py-1 font-semibold">Location :<span className="text-xl font-medium"> {data[0].Location}</span> </h2>
+                <h2 className="text-2xl py-1 font-semibold mb-3">Number of Accommodation: <span> {data[0].Accomodation} Members</span></h2>
                 <button className="text-2xl mb-4  cursor-pointer  px-4  w-56 h-8  text-white bg-red-500" onClick={() => setShowModal(true)}>Select Slots   </button>
                 <div className="bg-gray-200 text-black px-6 py-6">
                   <h2 className="text-2xl mb-2">Your date : <span className="text-lg font-semibold">{date}</span></h2>

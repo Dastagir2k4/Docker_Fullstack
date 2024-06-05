@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import {configureStore} from "@reduxjs/toolkit"
 import {Provider} from "react-redux"
-import useReducer from "./features/User.jsx"
+import useReducer from "./redux/User.jsx"
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; 
 const persistConfig = {

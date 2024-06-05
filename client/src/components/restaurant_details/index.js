@@ -131,14 +131,13 @@ app.post('/login', async (req, res) => {
           }
 
           const user = result[0];
-        //   console.log(user.UserId);
+
           const match = await bcrypt.compare(Password, user.Password);
           if (match) {
               console.log("User logged in");
               res.status(200).json({ 
                   role: 'admin',
                   user: {
-                      UserId:user.UserId,
                       FirstName: user.FirstName,
                       LastName: user.LastName,
                       Email: user.Email
@@ -183,11 +182,11 @@ app.post('/add-hotel',(req,res)=>{
 
 
 app.post("/add-hotelOrder",(req,res)=>{
-    const userid=req.body.UserId;
+    const userid=req.body.id;
     const hotelname=req.body.hotelname;
-    const totalperson=req.body.totalPerson;
-    const totalamount=req.body.totalAmount;
-    db.query("insert into UserBookings(user_id,hotelname,totalperson,amount) values(?,?,?,?)",[userid,hotelname,totalperson,totalamount],(err,result)=>{
+    const totalperson=req.body.totalperson;
+    const totalamount=req.body.amount;
+    db.query("insert into UserBookings(user_id,hotelname,totalperson,amount) values(?,?,?,?)",[userid,hotelname.totalperson,totalamount],(err,result)=>{
         if(err){
             res.status(500).send("Error while inserting userbooking order");
         }else{
@@ -196,30 +195,6 @@ app.post("/add-hotelOrder",(req,res)=>{
         }
     })
 })
-
-app.get("/userOrder",(req,res)=>{
-    db.query("select * from UserBookings",(err,result)=>{
-        if(err){
-            console.log("error while displaying");
-            res.status(500).send("error while display")
-        }else{
-            res.json(result);
-        }
-    })
-})
-
-app.get("/UserOrders", (req, res) => {
-    const id = req.query.userId;
-    db.query("select * from UserBookings where user_id=?", [id], (err, result) => {
-        if (err) {
-            console.log("Error while finding id", err);
-            res.status(500).send("Error while finding id", err);
-            return;
-        }
-        res.json(result);
-    });
-});
-
 
 app.get('/hotels',(req,res)=>{
     db.query("select * from hotel",(err,result)=>{

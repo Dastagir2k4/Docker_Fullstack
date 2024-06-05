@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import login from "./login.jpg";
 import { useDispatch } from "react-redux";
-import { loginn } from "../../../features/User";
+import { loginn } from "../../../redux/User";
 //useDispatch hook is for modifying the state
 const Login = () => {
   const dispatch = useDispatch();
@@ -31,11 +31,12 @@ const Login = () => {
         // console.log("Username ",result.data.user.FirstName);
         const Fname = result.data.user.FirstName;
         const Sname = result.data.user.LastName;
+        const UserId=result.data.user.UserId;
         console.log(Fname, Sname);
         if (role === "admin") {
           console.log("email" + Email);
           dispatch(
-            loginn({ FirstName: Fname, SecondName: Sname, Email: Email })
+            loginn({UserId:UserId, FirstName: Fname, SecondName: Sname, Email: Email  })
           );
           // dispatch(loginn(Email));
           navigate("/home");
@@ -55,10 +56,10 @@ const Login = () => {
       </h2>
       <div className="container mx-auto">
         <div className=" flex-col md:flex-row flex w-8/12 overflow-hidden rounded-xl mx-auto shadow-lg">
-          <div className="w-1/2">
+          <div className="md:w-1/2">
             <img src={login} alt="0" />
           </div>
-          <div className="w-1/2 py-16 px-12 mt-20">
+          <div className="md:w-1/2 py-16 px-12 mt-20">
             <h2 className="text-3xl mb-4">Login</h2>
             <form>
               <div className="mt-5">
@@ -74,7 +75,7 @@ const Login = () => {
                 <input
                   type="password"
                   placeholder="Password"
-                  className="border border-gray-400 py-1 px-2  md:w-full"
+                  className="border border-gray-400 py-1 px-2  w-full"
                   value={Password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
