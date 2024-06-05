@@ -11,10 +11,10 @@ app.use(cors());
 // app.use(express.static(process.env.STATIC_DIR))
 const db=mysql.createConnection(
     {
-        user:'root',
-        host:'localhost',
-        password:'root',
-        database:'restaurant',
+        user:'ubbkdelw2hweqro6',
+        host:'bhm17czq9qjsghpp7jsh-mysql.services.clever-cloud.com',
+        password:'5QYwV4D2dg7a8oPbrhq2',
+        database:'bhm17czq9qjsghpp7jsh',
     }
 )
 
