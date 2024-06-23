@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 const nodemail=require("nodemailer")
 
 const app=express();
-
 app.use(express.json());
 app.use(cors());
 // app.use(express.static(process.env.STATIC_DIR))
