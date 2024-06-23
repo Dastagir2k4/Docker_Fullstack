@@ -3,9 +3,9 @@ const mysql=require("mysql2");
 const cors=require("cors");
 const bcrypt = require('bcrypt');
 const nodemail=require("nodemailer")
-=
+
 const app=express();
-dotenv.config();
+
 app.use(express.json());
 app.use(cors());
 // app.use(express.static(process.env.STATIC_DIR))
