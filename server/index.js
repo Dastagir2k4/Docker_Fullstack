@@ -17,13 +17,7 @@ const db=mysql.createConnection(
     }
 )
 
-db.connect((err)=>{
-    if(!err){
-        console.log("Connected to database!");
-    }else{
-        console.log("Not Connected to database!");
-    }
-})
+
 
 
 
