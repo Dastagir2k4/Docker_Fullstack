@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import food from "./food.webp";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../navbar/Navbar";
 
 const ListCards = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const ListCards = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3030/hotels");
+        const response = await axios.get("https://reserve-eat-server-1.onrender.com/hotels");
         setData(response.data);
       } catch (err) {
         console.log("error", err);
@@ -26,6 +27,8 @@ const ListCards = () => {
   };
 
   return (
+    <div>
+      <Navbar/>
     <div className="min-h-screen flex flex-col items-center justify-center bg-red-500">
       <input
         className="w-1/2 mb-4 mt-4 h-8 px-2 py-3 rounded-lg text-black text-2xl bg-white border-black"
@@ -99,6 +102,7 @@ const ListCards = () => {
             </div>
           ))}
       </div>
+    </div>
     </div>
   );
 };

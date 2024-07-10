@@ -16,7 +16,7 @@ const Navbar = () => {
       </button>
       <div className={`md:flex ${isOpen ? "flex" : "hidden"} md:gap-20`}>
         <ul className="flex gap-10 text-2xl">
-          <li>Home</li>
+          <Link to="/home">Home</Link>
           <Link to="/restaurants">Restaurant</Link>
           <Link to="/profile">Profile</Link>
         </ul>

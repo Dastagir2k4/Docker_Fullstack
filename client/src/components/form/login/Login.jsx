@@ -21,7 +21,7 @@ const Login = () => {
     console.log(Email + Password);
     // Use the navigate function to go to the "/createaccount" route
     axios
-      .post("http://localhost:3030/login", {
+      .post("https://reserve-eat-server-1.onrender.com/login", {
         Email: Email,
         Password: Password,
       })

@@ -10,7 +10,7 @@ const Card = () => {
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
-        const response = await axios.get("http://localhost:3030/hotels");
+        const response = await axios.get("https://reserve-eat-server-1.onrender.com/hotels");
         setRestaurants(response.data.slice(0, 4));
       } catch (error) {
         console.error("Error fetching restaurants:", error);

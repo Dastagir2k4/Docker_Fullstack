@@ -16,7 +16,7 @@ const Signup = () => {
     e.preventDefault();
     console.log(FirstName, LastName);
     axios
-      .post("http://localhost:3030/signup", {
+      .post("https://reserve-eat-server-1.onrender.com/signup", {
         FirstName: FirstName,
         LastName: LastName,
         Email: Email,

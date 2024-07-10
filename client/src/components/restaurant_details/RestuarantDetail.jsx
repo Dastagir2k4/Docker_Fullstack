@@ -19,7 +19,7 @@ const RestuarantDetail = () => {
   useEffect(() => {
     const fetchRestaurant = async () => {
       try {
-        const response = await axios.get(`http://localhost:3030/hotels/${id}`);
+        const response = await axios.get(`https://reserve-eat-server-1.onrender.com/hotels/${id}`);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {

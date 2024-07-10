@@ -7,7 +7,7 @@ const Profile = () => {
     const [orders,setOrders]=useState([])
     const handleData= async()=>{
         try {
-            const response = await axios.get(`http://localhost:3030/UserOrders?userId=${user.UserId}`);
+            const response = await axios.get(`https://reserve-eat-server-1.onrender.com/UserOrders?userId=${user.UserId}`);
             setOrders(response.data);
             console.log("successfully clicked the data of histiry");
             console.log(orders);
