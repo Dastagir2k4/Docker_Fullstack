@@ -27,9 +27,9 @@ const Card = () => {
     navigaite(`/restaurant_detail/${id}`);
   };
   return (
-    <div className="bg-white min-h-screen">
+    <div className=" min-h-screen">
       <div>
-        <h1 className="text-4xl flex px-24 pt-16 font-lead">choose category</h1>
+        <h1 className="text-4xl text-red-500 flex px-24 pt-16 font-lead">choose category</h1>
         <div className="flex flex-col sm:flex-row ml-3 gap-10 py-8 px-24">
           <div
             className="flex flex-row bg-slate-200 h-32 w-56 rounded-2xl text-center shadow-2xl cursor-pointer "
@@ -62,7 +62,7 @@ const Card = () => {
         </div>
       </div>
 
-      <div className="text-4xl py-20 px-16 ml-20 font-lead">
+      <div className="text-4xl py-20 px-16 ml-20 font-lead text-red-500">
         <h2>Restaurants Near You</h2>
       </div>
       <div className=" gap-6 flex-wrap flex justify-center items-center mx-auto mb-20">

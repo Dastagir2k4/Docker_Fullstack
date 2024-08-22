@@ -18,10 +18,10 @@ const Home = () => {
       {/* Hero Section*/}
       <div
         id="hero"
-        className="flex flex-col min-h-screen md:flex-row bg-white text-black justify-center items-center"
+        className="flex flex-col min-h-screen md:flex-row bg-red- text-black justify-center items-center"
       >
         <div className="md:w-1/2 flex flex-col  mb-48">
-          <h1 className="text-4xl md:text-6xl font-serif text-black mb-10">
+          <h1 className="text-4xl md:text-6xl font-serif text-red-500 mb-10">
             Book Your Table Now
           </h1>
           <p className="text-lg md:text-2xl font-serif text-black opacity-90 mt-6 leading-relaxed">
