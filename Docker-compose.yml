@@ -4,7 +4,7 @@ services:
     build: ./client
  
     ports: 
-      - "5173:5173"
+      - "6060:5173"
     networks:
       - hotels
     depends_on:
@@ -21,3 +21,5 @@ services:
 networks:
   hotels:
     driver: bridge
+
+
